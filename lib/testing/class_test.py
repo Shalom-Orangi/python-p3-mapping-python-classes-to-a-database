@@ -12,7 +12,7 @@ class TestClass:
     def test_initializes_with_name_and_album(self):
         '''takes a name and album as __init__ arguments and saves them as instance attributes.'''
         song = Song("Hold On", "Born to Sing")
-        assert(song.name == "Hold On" and song.album == "Born to Sing")
+        assert(song.name == "Hold On" and song.albulm == "Born to Sing")
 
     def test_saves_song_to_table(self):
         '''has instancemethod "save()" that saves a song to music.db.'''
@@ -24,10 +24,10 @@ class TestClass:
         song = Song("Hold On", "Born to Sing")
         song.save()
         db_song = CURSOR.execute(
-            'SELECT * FROM songs WHERE name=? AND album=?',
+            'SELECT * FROM songs WHERE name=? AND albulm=?',
             ('Hold On', 'Born to Sing')
         ).fetchone()
-        assert(db_song[1] == song.name and db_song[2] == song.album)
+        assert(db_song[1] == song.name and db_song[2] == song.albulm)
 
     def test_creates_and_returns_song(self):
         '''has classmethod "create()" that creates a Song instance, saves it, and returns it.'''
@@ -37,8 +37,8 @@ class TestClass:
 
         song = Song.create("Hold On", "Born to Sing")
         db_song = CURSOR.execute(
-            'SELECT * FROM songs WHERE name=? AND album=?',
+            'SELECT * FROM songs WHERE name=? AND albulm=?',
             ('Hold On', 'Born to Sing')
         ).fetchone()
 
-        assert(db_song[0] == song.id and db_song[1] == song.name and db_song[2] == song.album)
+        assert(db_song[0] == song.id and db_song[1] == song.name and db_song[2] == song.albulm)
